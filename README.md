@@ -63,6 +63,6 @@ You can use the following commands to control the bot:
 * `FILT username` - Adds this user to the filter list.
 * `FOLO username` - Follows an user.
 * `UFOL username` - Unfollows an user.
-* `STOP BOT**` - Stops the bot. 
+* `STOP BOT` - Stops the bot. 
 
 The commands are case-insensitive.
