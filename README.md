@@ -41,7 +41,7 @@ Configuration
 
 You configure twittbot-nd by editing the `config.py` file. It contains your Twitter API keys which you get by making a new application on [dev.twitter.com](https://dev.twitter.com) and setting the access rights to **Read, Write and Direct Messages**.
 
-You define the admins of the bot (who can control it over direct messages) in the list `admins`. This contains the user IDs, which you can get by e.g. running `python getuserid.py nilsding`. 
+You define the admins of the bot (who can control it over direct messages) in the list `admins`. This contains the user IDs, which you can get by executing `python getuserid.py nilsding`. 
 
 The rest of the config file should be self-explaining.
 
