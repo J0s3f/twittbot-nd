@@ -53,16 +53,16 @@ Commands
 If you are an admin and send your bot a direct message, he will automatically reply to it and execute it. If you're not a known admin, he just ignores the direct message.
 You can use the following commands to control the bot:
 
-* `**CMDS**` - Lists all available commands.
-* `**RELO**` - Reloads the bot.
-* `**BCST** text` - Sends a text to all known admins
-* `**TWET** tweet` - Tweets a tweet.
-* `**+TWT** tweet` - Adds a tweet to the tweet store.
-* `**+RRP** tweet` - Adds a tweet to the random reply tweet store.
-* `**+RET** tag` - Adds a tag to the auto retweet list.
-* `**FILT** username` - Adds this user to the filter list.
-* `**FOLO** username` - Follows an user.
-* `**UFOL** username` - Unfollows an user.
-* `**STOP BOT**` - Stops the bot. 
+* `CMDS` - Lists all available commands.
+* `RELO` - Reloads the bot.
+* `BCST text` - Sends a text to all known admins
+* `TWET tweet` - Tweets a tweet.
+* `+TWT tweet` - Adds a tweet to the tweet store.
+* `+RRP tweet` - Adds a tweet to the random reply tweet store.
+* `+RET tag` - Adds a tag to the auto retweet list.
+* `FILT username` - Adds this user to the filter list.
+* `FOLO username` - Follows an user.
+* `UFOL username` - Unfollows an user.
+* `STOP BOT**` - Stops the bot. 
 
 The commands are case-insensitive.
