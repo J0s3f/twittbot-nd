@@ -39,7 +39,9 @@ Of course, if you want to, you can also change the file names in the `config.py`
 Configuration
 -------------
 
-You configure twittbot-nd by editing the `config.py` file. It contains your Twitter API keys which you get by making a new application on [dev.twitter.com](https://dev.twitter.com) and setting the access rights to **Read, Write and Direct Messages**.
+You configure twittbot-nd by editing the `config.py` file. It contains your Twitter API keys which you get by making a new application on [dev.twitter.com](https://dev.twitter.com) and setting the access rights to **Read, Write and Direct Messages**. 
+
+If you don't want to create a new application, try using [The Keygen™](http://twittbot-nd.nilsding.org). It will generate you a key which you simply paste into the config file.
 
 You define the admins of the bot (who can control it over direct messages) in the list `admins`. This contains the user IDs, which you can get by executing `python getuserid.py nilsding`. 
 

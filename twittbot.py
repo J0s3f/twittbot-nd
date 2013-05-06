@@ -22,6 +22,8 @@ import config
 import tweepy
 import httplib2
 import random
+import string
+import base64
 from time import sleep
 try:
 	import json
@@ -30,6 +32,19 @@ except ImportError:
 
 class twittbot:
 	def __init__(self):
+		if config.oauth.KEY_ENABLED:
+			r13 = string.maketrans("ABCDEFGHIJKLMabcdefghijklmNOPQRSTUVWXYZnopqrstuvwxyz", "NOPQRSTUVWXYZnopqrstuvwxyzABCDEFGHIJKLMabcdefghijklm")
+			k = string.translate(config.oauth.KEY, r13);
+			k = k[::-1]
+			k = base64.b64decode(k)
+			k = k[::-1]
+			k = string.translate(k, r13);
+			keys = k.split('|')
+			config.oauth.CONSUMER_KEY = keys[0]
+			config.oauth.CONSUMER_SECRET = keys[1]
+			config.oauth.ACCESS_TOKEN = keys[2]
+			config.oauth.ACCESS_TOKEN_SECRET = keys[3]
+
 		self.active = True
 		self.load_files()
 		self.init_api()
@@ -97,7 +112,7 @@ class twittbot:
 		ulistener = StreamListener()
 		self.user_stream = tweepy.Stream(auth = self.auth, listener = ulistener)
 		print '\033[32mok\033[0m Done.'
-	
+
 	def run(self):
 		if not self.user_stream.running:
 			print '-- Connecting to user stream...'

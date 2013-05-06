@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # This file is part of twittbot-nd
 # Copyright (C) 2013 nilsding
 #
@@ -20,6 +21,10 @@ class oauth:
 	CONSUMER_SECRET     = ""
 	ACCESS_TOKEN        = ""
 	ACCESS_TOKEN_SECRET = ""
+	
+	# If you're using my API keys using The Keygen™, be sure to check this.
+	KEY_ENABLED = False
+	KEY = ""
 
 class twittbot:
 	admins = [29952844] # Twitter user IDs of the admins.
