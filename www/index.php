@@ -37,7 +37,8 @@ Copy and paste it into your <strong>config.py</strong> file at line 27. Also be 
 <?php } ?></p>
 </div>
 <div class="footer">
-This keygen part of <a href="https://github.com/nilsding/twittbot-nd">twittbot-nd</a>, which is free software, licensed under the <a href="http://www.gnu.org/licenses/agpl-3.0.html">GNU Affero General Public License version 3</a>.
+This keygen part of <a href="https://github.com/nilsding/twittbot-nd">twittbot-nd</a>, which is free software, <br />
+licensed under the <a href="http://www.gnu.org/licenses/agpl-3.0.html">GNU Affero General Public License version 3</a>.
 </div>
 </body>
 </html>
