@@ -272,7 +272,9 @@ class twittbot:
 			try:
 				user_id = self.api.get_user(data['text'][5:140]).id
 				with open(unicode(config.files.admins, errors = 'replace'), "a") as f:
-					f.write(data['text'][5:140].encode('utf-8', errors = 'replace') + '\n')
+					new_admin_user = data['text'][5:140]
+					new_admin_id = self.api.get_user(new_admin_user).id_str
+					f.write(new_admin_id.encode('utf-8', errors = 'replace') + '\n')
 				self.api.send_direct_message(user = data['sender']['screen_name'], text = '`' + data['text'][5:140] + '` is now an admin. Write `RELO` to complete.')
 			except:
 				self.api.send_direct_message(user = data['sender']['screen_name'], text = traceback.format_exc().splitlines()[-1])
