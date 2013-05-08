@@ -38,10 +38,6 @@ def check_config():
 		print '   This is NOT recommended unless you know what you\'re doing.'
 		err = True
 	
-	if not config.twittbot.admins:
-		print '\033[36m>>\033[0m There are no values in the `admins\' list.'
-		print '   Do not expect to control the bot using direct messages.'
-	
 	if err:
 		print '\033[31m!!\033[0m You should review the config file.'
 	else:
@@ -50,6 +46,11 @@ def check_config():
 	print '-- Checking if files exist...'
 	err = False
 	
+	try:
+		with open(config.files.admins): pass
+	except IOError:
+		print '\033[31m!!\033[0m The file \033[1m' + config.files.admins + '\033[0m does not exist. Please create it.'
+		err = True
 	try:
 		with open(config.files.tweets_store): pass
 	except IOError:

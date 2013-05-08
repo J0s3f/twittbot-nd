@@ -66,5 +66,6 @@ You can use the following commands to control the bot:
 * `FOLO username` - Follows an user.
 * `UFOL username` - Unfollows an user.
 * `STOP BOT` - Stops the bot. 
+* `+ADM user` - Adds a new admin.
 
 The commands are case-insensitive.

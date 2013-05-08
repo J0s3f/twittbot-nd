@@ -68,6 +68,9 @@ class twittbot:
 			with open(config.files.reply_random) as f:
 				self.reply_random = [s.rstrip('\n') for s in f.readlines()]
 				print '\033[32mok\033[0m Loaded %d random reply tweets.' % len(self.reply_random)
+			with open(config.files.admins) as f:
+				self.admins = [s.rstrip('\n') for s in f.readlines()]
+				print '\033[32mok\033[0m This bot has %d admins.' % len(self.admins)
 		except:
 			print '\033[31m!!\033[0m I failed loading the text files :-('
 			traceback.print_exc()
@@ -186,7 +189,7 @@ class twittbot:
 			print '\033[35;1mDirect Message from ' + data['sender']['screen_name'] + ':\033[0m ' + str(data['text']).encode('utf-8')
 		except:
 			print '\033[35;1mDirect Message from ' + data['sender']['screen_name'] + '.\033[0m'
-		if not data['sender']['id'] in config.twittbot.admins:
+		if not data['sender']['id_str'] in self.admins:
 			print '\033[35m' + data['sender']['screen_name'] + ' is not an admin, ignoring\033[0m'
 			return
 		if 'TWET ' in data['text'][0:5].upper():  # Tweets a tweet.
@@ -209,7 +212,7 @@ class twittbot:
 			except:
 				print '\033[35mCommand: BCST, sending a direct message to all admins.\033[0m'
 			message_from = "[%s] " % data['sender']['screen_name']
-			for admin in config.twittbot.admins:
+			for admin in self.admins:
 				try:
 					self.api.send_direct_message(user = admin, text = str(message_from + tweepy.utils.unescape_html(data['text'][5:140 - len(message_from)])))
 				except:
@@ -264,6 +267,16 @@ class twittbot:
 			except:
 				self.api.send_direct_message(user = data['sender']['screen_name'], text = traceback.format_exc().splitlines()[-1])
 				print '\033[31m!! ' + traceback.format_exc().splitlines()[-1] + '\033[0m'
+		elif '+ADM ' in data['text'][0:5].upper():  # New admin
+			print '\033[35mCommand: +ADM, adding \033[0m' + str(data['text'][5:140]).encode('utf-8') + '\033[35m to the admin list.\033[0m'
+			try:
+				user_id = self.api.get_user(data['text'][5:140]).id
+				with open(unicode(config.files.admins, errors = 'replace'), "a") as f:
+					f.write(data['text'][5:140].encode('utf-8', errors = 'replace') + '\n')
+				self.api.send_direct_message(user = data['sender']['screen_name'], text = '`' + data['text'][5:140] + '` is now an admin. Write `RELO` to complete.')
+			except:
+				self.api.send_direct_message(user = data['sender']['screen_name'], text = traceback.format_exc().splitlines()[-1])
+				print '\033[31m!! ' + traceback.format_exc().splitlines()[-1] + '\033[0m'
 		elif 'FOLO ' in data['text'][0:5].upper():
 			print '\033[35mCommand: FOLO, following user \033[0m' + str(data['text'][5:140]).encode('utf-8') + '.\033[0m'
 			try:
@@ -287,7 +300,7 @@ class twittbot:
 		elif 'CMDS' in data['text'][0:4].upper():
 			print '\033[35mCommand: CMDS, sending all available commands.'
 			self.api.send_direct_message(user = data['sender']['screen_name'], text = '(1/2) I know the following commands:')
-			self.api.send_direct_message(user = data['sender']['screen_name'], text = '(2/2) CMDS; RELO; TWET tweet; +TWT tweet; +RRP tweet; +RET tag; FILT user; FOLO user; UFOL user; STOP BOT; BCST message')
+			self.api.send_direct_message(user = data['sender']['screen_name'], text = '(2/2) CMDS; RELO; TWET tweet; +TWT tweet; +RRP tweet; +RET tag; FILT user; FOLO user; UFOL user; STOP BOT; BCST message; +ADM user')
 		else:
 			print '\033[35mUnknown command %s. \033[0m' % data['text'][0:4]
 			self.api.send_direct_message(user = data['sender']['screen_name'], text = 'Unknown command `' + data['text'][0:4] + '\'. Type CMDS for a list of a commands.')

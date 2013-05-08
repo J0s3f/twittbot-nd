@@ -27,12 +27,12 @@ class oauth:
 	KEY = ""
 
 class twittbot:
-	admins = [29952844] # Twitter user IDs of the admins.
 	interval = 10        # The interval in minutes the tweets are posted.
 	followback = False   # Follow back new followers
 	okay_texts = ["Looks great.", "Okay.", "Success!", "Whee!", "\o/", "You now should", "Awesome!"]
 
 class files:
+	admins = "admins.txt" # Contains the user IDs of all admins.
 	tweets_store = "tweets/tweet_file.txt" # Contains all tweets.
 	reply_tweet = "tweets/reply_tweet.txt" # Contains all conditional replies. 
 	reply_random = "tweets/reply_random.txt" # Contains all random replies.
