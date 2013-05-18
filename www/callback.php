@@ -24,6 +24,7 @@ unset($_SESSION['oauth_token_secret']);
 
 if (200 == $connection->http_code) {
 	$_SESSION['status'] = 'verified';	
+	$_SESSION['user_id'] = $_SESSION['access_token']['user_id'];
 	header('Location: ./index.php');
 } else {
 	header('Location: ./clearsessions.php');

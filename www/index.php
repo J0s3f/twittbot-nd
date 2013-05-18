@@ -18,6 +18,28 @@ function gen_key($acctoken, $acctokensecret) {
 	$key = str_rot13($key);
 	return $key;
 }
+
+/* rmempty by MeikoDis - https://github.com/MeikoDis/waschi/blob/master/list.php */
+function rmempty($array) {
+	foreach ($array as $key => $value) {
+		if ($value === '') unset ($array[$key]);
+	}
+	unset($key);
+	return $array;
+}
+
+$admins = rmempty(explode("\n", file_get_contents(FILE_ADMINS)));
+$admin = false;
+
+if (isset($_SESSION['user_id'])) {
+	foreach ($admins as $user) {
+		if ((string) $_SESSION['user_id'] === rtrim($user)) {
+			$admin = true;
+			unset($user);
+			break;
+		}
+	}
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,10 +56,12 @@ function gen_key($acctoken, $acctokensecret) {
 Your generated key is:<br />
 <code><?php echo gen_key($_SESSION['access_token']['oauth_token'], $_SESSION['access_token']['oauth_token_secret']); ?></code><br />
 Copy and paste it into your <strong>config.py</strong> file at line 27. Also be sure to set KEY_ENABLED to <strong>True</strong> 
-<?php } ?></p>
+<?php if ($admin) { ?></p>
+<p>It seems you also are an admin for my bot, do you want to <a href="admin.php">administrate</a> it?
+<?php } } ?></p>
 </div>
 <div class="footer">
-This keygen part of <a href="https://github.com/nilsding/twittbot-nd">twittbot-nd</a>, which is free software, <br />
+This site is part of <a href="https://github.com/nilsding/twittbot-nd">twittbot-nd</a>, which is free software, <br />
 licensed under the <a href="http://www.gnu.org/licenses/agpl-3.0.html">GNU Affero General Public License version 3</a>.
 </div>
 </body>

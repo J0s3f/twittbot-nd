@@ -38,3 +38,28 @@ div.footer {
 	color: #787878;
 	padding-top: 4px;
 }
+
+p.message {
+	border: 1px solid #d9d3b5;
+	background-color: #fcf5d2;
+	border-radius: 4px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, .24);
+}
+
+ul.adm-menu {
+	list-style-type: none;	
+	font: 90% monospace; 
+	margin: 0px;
+	padding: 0px;
+}
+
+ul.adm-menu li {
+	display: inline-block;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.dhd {
+	background-color: #b2b2b2;
+	font-family: monospace;
+}
