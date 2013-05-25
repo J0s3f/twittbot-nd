@@ -197,7 +197,7 @@ class twittbot:
 				print '\033[35mCommand: TWET, tweeting \033[0m' + str(data['text'][5:140]).encode('utf-8')
 			except:
 				print '\033[35mCommand: TWET, tweeting a tweet.\033[0m'
-			tweet = data['text'][5:140]
+			tweet = tweepy.utils.unescape_html(data['text'][5:140])
 			if '${{{RANDOMWORD}}}' in tweet:
 				tweet = tweet.replace('${{{RANDOMWORD}}}', self.random_word())
 			try:
@@ -233,7 +233,7 @@ class twittbot:
 			except:
 				print '\033[35mCommand: +RET, adding something to the list of retweet tags\033[0m'
 			with open(unicode(config.files.retweet, errors = 'replace'), "a") as f:
-				f.write(data['text'][5:140].encode('utf-8', errors = 'replace') + '\n')
+				f.write(tweepy.utils.unescape_html(data['text'][5:140]).encode('utf-8', errors = 'replace') + '\n')
 			self.api.send_direct_message(user = data['sender']['screen_name'], text = 'Added `' + data['text'][5:140] + '`. Write `RELO` to complete.')
 		elif '+RRP ' in data['text'][0:5].upper(): # Add a random reply tweet
 			try:
@@ -242,7 +242,7 @@ class twittbot:
 				print '\033[35mCommand: +RRP, adding something to the random reply list\033[0m'
 			try:
 				with open(unicode(config.files.reply_random, errors = 'replace'), "a") as f:
-					f.write(data['text'][5:140].replace(chr(0x0A), "\\n").encode('utf-8', errors = 'replace') + '\n')
+					f.write(tweepy.utils.unescape_html(data['text'][5:140].replace(chr(0x0A), "\\n")).encode('utf-8', errors = 'replace') + '\n')
 				self.api.send_direct_message(user = data['sender']['screen_name'], text = config.twittbot.okay_texts[random.randint(0, len(config.twittbot.okay_texts) - 1)] + ' Write `RELO` to complete.')
 			except:
 				self.api.send_direct_message(user = data['sender']['screen_name'], text = 'Got an error: ' +  traceback.format_exc().splitlines()[-1])
@@ -253,7 +253,7 @@ class twittbot:
 				print '\033[35mCommand: +TWT, adding something to the random tweet list.\033[0m'
 			try:
 				with open(unicode(config.files.tweets_store, errors = 'replace'), "a") as f:
-					f.write(data['text'][5:140].replace(chr(0x0A), "\\n").encode('utf-8', errors = 'replace') + '\n')
+					f.write(tweepy.utils.unescape_html(data['text'][5:140].replace(chr(0x0A), "\\n")).encode('utf-8', errors = 'replace') + '\n')
 				self.api.send_direct_message(user = data['sender']['screen_name'], text = config.twittbot.okay_texts[random.randint(0, len(config.twittbot.okay_texts) - 1)] + ' Write `RELO` to complete.')
 			except:
 				self.api.send_direct_message(user = data['sender']['screen_name'], text = 'Got an error: ' +  traceback.format_exc().splitlines()[-1])
