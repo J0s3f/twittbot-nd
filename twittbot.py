@@ -157,11 +157,14 @@ class twittbot:
 			if not status.user.id == self.me.id:
 				for tag in self.retweet_tags:          # A tweet will get retweeted.
 					if tag.lower() in status.text.lower():
-						self.api.retweet(status.id)
 						try:
-							print '\033[34;1mRetweeted ' + status.user.screen_name + ':\033[0m ' + str(status.text).encode('utf-8')
+							self.api.retweet(status.id)
+							try:
+								print '\033[34;1mRetweeted ' + status.user.screen_name + ':\033[0m ' + str(status.text).encode('utf-8')
+							except:
+								print '\033[34;1mRetweeted a tweet.\033[0m'
 						except:
-							print '\033[34;1mRetweeted a tweet.\033[0m'
+							print '\033[31;1mCouldn\'t Retweet!\033[0m'
 				if self.me.screen_name.lower() in status.text.lower():
 					try:
 						print '\033[33;1mMentioned by ' + status.user.screen_name + ':\033[0m ' + str(status.text).encode('utf-8')
